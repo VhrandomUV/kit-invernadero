@@ -1,0 +1,202 @@
+* {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    vertical-align: baseline;
+}
+body {
+    text-align: center;
+    font-family: sans-serif;
+    background-color: black;
+}
+
+
+.head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 63px;
+    background-color:rgb(5, 5, 5);
+    position: fixed;
+    width: 100%;
+    z-index: 100;
+    opacity: 0.85;
+
+}
+
+.logo {
+    margin-left: 30px;
+}
+
+.logo a {
+    text-decoration: none;
+    color: rgb(13, 214, 13);
+    text-transform: uppercase;
+    font-size: 20px;
+}
+
+
+
+
+ 
+.header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 60vh;
+    background: url(imagenes/bkg_invernadero.jpg) no-repeat center; 
+    background-size: cover;
+}
+
+.title {
+    margin-bottom: 40px;
+    font-size: 60px;
+    font-weight: 600;
+    text-transform: uppercase;
+    color: rgb(2, 2, 2);
+}
+
+p {
+    margin-bottom: 40px;
+    font-size: 18px;
+    color: white;
+    padding:0 150px;
+}
+
+.content {
+    height: 50vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: unset;
+    align-items: center;
+}
+
+
+
+pre {
+    text-transform: uppercase;
+    color: antiquewhite;
+    text-align: center;
+    font-size: medium;
+}
+
+
+td {
+    font-size: 22px;
+}
+p {
+    padding: 30px 30px;
+    letter-spacing: 1px;
+    border: 1px solid #ffffff;
+    border-collapse: collapse;
+    /* text-transform: uppercase; */
+    text-align: center;
+}
+@media (max-width: 768px) {
+    .p {
+        padding: 0px;
+    }
+
+    .title{
+        margin-bottom: 0px;
+        font-size: 40px;
+    }
+    .sau {
+        height: 100vh;
+        padding: 50px 0;
+    }
+    .about {
+        height: 100vh;
+        padding: 50px 0;
+    }
+    .footer-sectio {
+        display: flex;
+        flex-direction: column;
+    }
+    .navbar {
+        display: none;
+    }
+}
+
+
+
+
+
+.lbl-menu label{
+    display: inline-block;
+    padding: 15px 15px;
+    color: rgb(53, 221, 19);
+    cursor: pointer;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-size: 20px;
+    transition: all 400ms ease;}
+
+
+.lbl-menu label img{
+    width: 25px;
+    height: 25px;
+}       
+
+.lbl-menu :hover{
+    
+    background: #303030 ;
+}
+
+
+.content{
+    color: #fff;
+    position: relative;
+    
+}
+.content div{
+    position: absolute;
+    line-height: 1.8;
+    transition: all 600ms ease;
+    opacity: 0;
+    visibility: hidden;
+    transform: scale(0.90);
+    padding: 30px;
+    background: black;
+    padding-bottom: 40px;
+    
+}
+#radio1,#radio2,#radio3,#radio4{
+    display: none;
+}
+#radio1:checked ~ .tab1,
+#radio2:checked ~ .tab2,
+#radio3:checked ~ .tab3,
+#radio4:checked ~ .tab4
+{
+    opacity: 1;
+    visibility: visible;
+    transform: scale(0.96);
+}
+
+.tab2 h2 {
+    text-transform: uppercase;
+}
+
+.tab4 h2 {
+    text-transform: uppercase;
+}
+
+table,th,td {
+    border: 1px solid #ffffff;
+    border-collapse: collapse;
+    text-transform: uppercase;
+    text-align: center;
+    padding-left: 5px;
+    padding-right:5px;
+}
+
+.tab1 h1 {
+    text-transform: uppercase;
+    text-align: center;
+    font-size: larger;
+}
+
+
+
