@@ -46,9 +46,10 @@ conection.query('SELECT * FROM eventos', (err, rows) => {
 function prueba(){
     conection.query(`INSERT INTO eventos (hora, medicion) VALUES(${h}, ${t})` , (err, rows) => {
         if(err) throw err
-        console.log('la conexion funciona') 
-        console.log(h)
+        
+        document.getElementById('elementos').innerHTML = h;
     })
+    
 }
 
 
