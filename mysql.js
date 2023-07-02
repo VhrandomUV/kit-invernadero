@@ -29,15 +29,17 @@ conection.connect( (err) => {
     console.log('la conexion funciona')
 })
 
-conection.query('SELECT * FROM eventos', (err, rows) => {
-    console.log(rows)
 
-})
 
 conection.query(`INSERT INTO eventos (hora, medicion) VALUES(${h}, ${t})` , (err, rows) => {
     if(err) throw err
     console.log('la conexion funciona') 
     console.log(h)
 })
-    
+
+conection.query('SELECT * FROM eventos', (err, rows) => {
+    console.log(rows)
+
+})
+
 conection.end()
