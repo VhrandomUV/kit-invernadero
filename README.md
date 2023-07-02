@@ -3,4 +3,4 @@
 
 
 ## Descripccion
-Trabajo Introdduccion in genieria informatica
+Trabajo Introdduccion ingenieria informatica
