@@ -1,0 +1,14 @@
+{
+  "name": "kit-invernadero",
+  "version": "1.0.0",
+  "description": "Trabajo Introdduccion ingenieria informatica",
+  "main": "script.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "mysql": "^2.18.1"
+  }
+}
