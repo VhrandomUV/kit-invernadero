@@ -17,8 +17,7 @@ function getTemperatura(min, max) {
   function hora(){
     const d = new Date()
     var horas = d.toLocaleTimeString()
-    formated = horas.replace(':','')
-    formated = formated.replace(':','')
+    formated = horas.replaceAll(':','')
     return formated
 }
 
