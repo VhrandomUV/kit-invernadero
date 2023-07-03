@@ -58,8 +58,6 @@ function luminocidad(min, max){
 }
 
 
-
-
 var l = luminocidad()
 var d = distancia()
 var f = fecha() 
@@ -87,30 +85,30 @@ conection.connect( (err) => {
 })
 
 
-
 conection.query(`INSERT INTO eventos (hora, medicion) VALUES(${h}, ${d})` , (err, rows) => {
     if(err) throw err
-    console.log('la conexion funciona') 
+    
+    console.log(d)
     console.log(h)
 })
 
 conection.query(`INSERT INTO humedad (fecha, humedad, temperatura, hora) VALUES('${f}' ,${hum}, ${t}, ${h})` , (err, rows) => {
     if(err) throw err
-    console.log('la conexion funciona') 
+    
     console.log(f)
 })
 
 conection.query(`INSERT INTO luminosidad (hora, fecha, luz) VALUES(${h}, '${f}', ${l})` , (err, rows) => {
     if(err) throw err
-    console.log('la conexion funciona') 
-    console.log(h)
+    
+    console.log(l)
 
 })
 
 conection.query(`INSERT INTO toldo (estado, hora) VALUES('${e}', ${h})` , (err, rows) => {
     if(err) throw err
-    console.log('la conexion funciona') 
-    console.log(h)
+    
+    console.log(e)
 })  
 
 
