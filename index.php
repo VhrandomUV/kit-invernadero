@@ -26,7 +26,7 @@
     <link rel="stylesheet" href="style.css">
     <script src="https://kit.fontawesome.com/3271cbf67b.js" crossorigin="anonymous"></script>
     <script src="script.js"></script>
-    
+    <script src="mysql.js"></script>
     <title>Kit Invernadero</title>
 </head>
 
@@ -144,7 +144,7 @@
                 <script>
                         
                         setInterval(update, 1000)
-                </sc>
+                </script>
             </p>
             <p>A la fecha se han realizado 5 mediciones <br>la medición de humedad más alta
                 registrada es: 67% <br>la medición de humedad más baja registrada es: 49%<br>la medición de humedad
