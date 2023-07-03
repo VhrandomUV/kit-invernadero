@@ -47,11 +47,11 @@ function luminocidad(min, max){
 
     var horas = d.getHours()
     if (horas > 18 ||  horas < 7){
-      luz = 1
+      luz = 0
     }
 
     if (horas <= 18 || horas >= 7){
-      luz = 0
+      luz = 1
     }
     return luz
 
@@ -85,11 +85,12 @@ conection.connect( (err) => {
 })
 
 
-conection.query(`INSERT INTO eventos (hora, medicion) VALUES(${h}, ${d})` , (err, rows) => {
+conection.query(`INSERT INTO eventos (hora, medicion, fecha) VALUES(${h}, ${d}, '${f}')` , (err, rows) => {
     if(err) throw err
     
     console.log(d)
     console.log(h)
+    console.log(f)
 })
 
 conection.query(`INSERT INTO humedad (fecha, humedad, temperatura, hora) VALUES('${f}' ,${hum}, ${t}, ${h})` , (err, rows) => {

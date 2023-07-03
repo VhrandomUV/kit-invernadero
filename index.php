@@ -1,3 +1,21 @@
+<?php
+    include('conect.php');
+    $eventos_query = 'SELECT * FROM eventos ORDER by hora DESC LIMIT 8';
+    $humedad_query = 'SELECT * FROM humedad';
+    $luminosidad_query = 'SELECT * FROM luminosidad';
+    $toldo_query = 'SELECT * FROM toldo';
+
+    $n_eventos_query = 'SELECT COUNT(*) as total FROM eventos';
+    $n_eventos = mysqli_query($conex, $n_eventos_query);
+    
+    
+    $eventos= mysqli_query($conex, $eventos_query);
+    $humedad = mysqli_query($conex, $humedad_query);
+    $luminosidad = mysqli_query($conex, $luminosidad_query);
+    $toldo = mysqli_query($conex, $toldo_query);
+?>
+
+
 <!DOCTYPE html>
 <html lang="es">
 
@@ -8,7 +26,7 @@
     <link rel="stylesheet" href="style.css">
     <script src="https://kit.fontawesome.com/3271cbf67b.js" crossorigin="anonymous"></script>
     <script src="script.js"></script>
-    <script src="mysql.js"></script>
+    
     <title>Kit Invernadero</title>
 </head>
 
@@ -70,21 +88,31 @@
 
         <input type="radio" name="radio" id="radio2">
         <div class="tab2">
+        <?php
+        while ($row = mysqli_fetch_assoc($n_eventos)){?>
+        
             <h2>Eventos Destacados</h2>
-            <p>Se han detectado 5 eventos <br> Se han detectado 5 eventos de proximidad </p>
+            <p>Se han detectado <?php echo $row['total'] ?> eventos de proximidad 
+            <?php }?>
 
             <table width="100%;">
-                <tr>
+
+                <tr> 
                     <th>Fecha</th>
                     <th>Hora</th>
                     <th>Distancia</th>
                 </tr>
+                
+                <?php
+                while ($row = mysqli_fetch_assoc($eventos)){?>
+
                 <tr>
-                    <td>23/03/17</td>
-                    <td>16:33:12</td>
-                    <td>1.6 mts</td>
+                    <td><?php echo $row['fecha'] ?></td>
+                    <td><?php echo $row['hora'] ?></td>
+                    <td><?php echo $row['medicion']?>cm</td>
                 </tr>
-                <tr>
+                <?php }?>
+                <!-- <tr>
                     <td>23/03/18</td>
                     <td>22:23:24</td>
                     <td>3.7 mts</td>
@@ -103,7 +131,7 @@
                     <td>23/03/21</td>
                     <td>17:25:53</td>
                     <td>5.9 mts</td>
-                </tr>
+                </tr> -->
 
             </table>
 
@@ -116,7 +144,7 @@
                 <script>
                         
                         setInterval(update, 1000)
-                </script>
+                </sc>
             </p>
             <p>A la fecha se han realizado 5 mediciones <br>la medición de humedad más alta
                 registrada es: 67% <br>la medición de humedad más baja registrada es: 49%<br>la medición de humedad
@@ -132,7 +160,7 @@
                 <tr>
                     <th>Fecha</th>
                     <th>Hora de Apertura Toldo</th>
-                    <th>Hora de Cierre Toldo</th>
+                    <th>Estado del Toldo</th>
                 </tr>
                 <tr>
                     <td>23/03/17</td>
