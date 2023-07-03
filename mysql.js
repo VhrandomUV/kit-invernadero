@@ -106,7 +106,7 @@ conection.query(`INSERT INTO luminosidad (hora, fecha, luz) VALUES(${h}, '${f}',
 
 })
 
-conection.query(`INSERT INTO toldo (estado, hora) VALUES('${e}', ${h})` , (err, rows) => {
+conection.query(`INSERT INTO toldo (estado, hora, fecha) VALUES('${e}', ${h}, '${f}')` , (err, rows) => {
     if(err) throw err
     
     console.log(e)

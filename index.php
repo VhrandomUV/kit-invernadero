@@ -1,9 +1,18 @@
 <?php
     include('conect.php');
     $eventos_query = 'SELECT * FROM eventos ORDER by hora DESC LIMIT 8';
-    $humedad_query = 'SELECT * FROM humedad';
+    $humedad_query = 'SELECT * FROM humedad ORDER by fecha DESC , hora DESC LIMIT 1';
     $luminosidad_query = 'SELECT * FROM luminosidad';
-    $toldo_query = 'SELECT * FROM toldo';
+    $toldo_query = 'SELECT * FROM toldo ORDER by fecha DESC , hora DESC LIMIT 6';
+    $toldo_estado_query = 'SELECT * FROM toldo ORDER by fecha DESC , hora DESC LIMIT 1';
+
+    $humedad_avg_query = 'SELECT AVG(humedad) AS avg FROM humedad';
+    $humedad_avg = mysqli_query($conex, $humedad_avg_query);
+
+    $humedad_min_query = 'SELECT MIN(humedad) AS min FROM humedad';
+    $humedad_max_query = 'SELECT MAX(humedad) AS max FROM humedad';
+    $humedad_min = mysqli_query($conex, $humedad_min_query);
+    $humedad_max = mysqli_query($conex, $humedad_max_query);
 
     $n_eventos_query = 'SELECT COUNT(*) as total FROM eventos';
     $n_eventos = mysqli_query($conex, $n_eventos_query);
@@ -13,6 +22,7 @@
     $humedad = mysqli_query($conex, $humedad_query);
     $luminosidad = mysqli_query($conex, $luminosidad_query);
     $toldo = mysqli_query($conex, $toldo_query);
+    $toldo_estado = mysqli_query($conex, $toldo_estado_query);
 ?>
 
 
@@ -25,7 +35,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
     <link rel="stylesheet" href="style.css">
     <script src="https://kit.fontawesome.com/3271cbf67b.js" crossorigin="anonymous"></script>
-    <script src="script.js"></script>
+    
     <script src="mysql.js"></script>
     <title>Kit Invernadero</title>
 </head>
@@ -35,7 +45,7 @@
     <div class="head">
 
         <div class="logo">
-            <a href="index.html">Invernadero Inteligente</a>
+            <a href="index.php">Invernadero Inteligente</a>
         </div>
 
 
@@ -80,10 +90,7 @@
                 </p>
 
 
-            <p>Niveles de Humedad: <br>a la fecha se han realizado 5 mediciones <br>la medición de humedad más alta
-                registrada es: 67% <br>la medición de humedad más baja registrada es: 49%<br>la medición de humedad
-                promedio es: 52%
-            </p>
+            
         </div>
 
         <input type="radio" name="radio" id="radio2">
@@ -112,26 +119,7 @@
                     <td><?php echo $row['medicion']?>cm</td>
                 </tr>
                 <?php }?>
-                <!-- <tr>
-                    <td>23/03/18</td>
-                    <td>22:23:24</td>
-                    <td>3.7 mts</td>
-                </tr>
-                <tr>
-                    <td>23/03/19</td>
-                    <td>12:54:53</td>
-                    <td>0.2 mts</td>
-                </tr>
-                <tr>
-                    <td>23/03/20</td>
-                    <td>16:57:25</td>
-                    <td>6.1 mts</td>
-                </tr>
-                <tr>
-                    <td>23/03/21</td>
-                    <td>17:25:53</td>
-                    <td>5.9 mts</td>
-                </tr> -->
+                
 
             </table>
 
@@ -141,52 +129,53 @@
         <div class="tab3">
             <h2>Niveles de Humedad</h2>
             <p id="elementos">
-                <script>
-                        
-                        setInterval(update, 1000)
-                </script>
+            <?php
+                while ($row = mysqli_fetch_assoc($humedad)){?>
+
+                <tr>
+                    <td><?php echo $row['fecha'] ?></td>
+                    <td><?php echo $row['hora'] ?></td>
+                    <td><?php echo $row['humedad']?>%</td>
+                    <td><?php echo $row['temperatura']?>°C</td>
+                </tr>
+                <?php }?>
             </p>
-            <p>A la fecha se han realizado 5 mediciones <br>la medición de humedad más alta
-                registrada es: 67% <br>la medición de humedad más baja registrada es: 49%<br>la medición de humedad
-                promedio es: 52%
+            <?php
+                while ($avg = mysqli_fetch_assoc($humedad_avg)){
+                    $max = mysqli_fetch_assoc($humedad_max); 
+                    $min = mysqli_fetch_assoc($humedad_min);  ?>
+            <p> La medición de humedad más altaregistrada es: <?php echo $max['max']?>% <br>
+            la medición de humedad más baja registrada es: <?php echo $min['min']?> %<br>
+            la medición de humedad promedio es: <?php echo $avg['avg'] ?> %
             </p>
+            <?php }?>
         </div>
 
         <input type="radio" name="radio" id="radio4">
         <div class="tab4">
             <h2>Mediciones de Luminosidad</h2>
-            <p id='hora'> <script>  setInterval(hora,1000)  </script></p>
+            <p id='hora'>
+            <?php $out  = mysqli_fetch_assoc($toldo_estado);
+            echo $out['fecha']," " ,$out['hora'], " ",$out['estado'] 
+            ?>
+            </p>
             <table width="100%;">
                 <tr>
                     <th>Fecha</th>
-                    <th>Hora de Apertura Toldo</th>
+                    <th>Hora </th>
                     <th>Estado del Toldo</th>
                 </tr>
+                <?php
+                while ($row = mysqli_fetch_assoc($toldo)){?>
+
                 <tr>
-                    <td>23/03/17</td>
-                    <td>07:19:12</td>
-                    <td>20:45:00</td>
+                    <td><?php echo $row['fecha'] ?></td>
+                    <td><?php echo $row['hora'] ?></td>
+                    <td><?php echo $row['estado']?></td>
+                    
                 </tr>
-                <tr>
-                    <td>23/03/18</td>
-                    <td>05:09:24</td>
-                    <td>19:57:03</td>
-                </tr>
-                <tr>
-                    <td>23/03/19</td>
-                    <td>05:04:53</td>
-                    <td>19:34:56</td>
-                </tr>
-                <tr>
-                    <td>23/03/20</td>
-                    <td>06:23:25</td>
-                    <td>18:32:32</td>
-                </tr>
-                <tr>
-                    <td>23/03/21</td>
-                    <td>06:12:53</td>
-                    <td>20:12:22</td>
-                </tr>
+                <?php }?>
+                    
             </table>
         </div>
 
