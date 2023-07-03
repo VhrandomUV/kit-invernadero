@@ -35,11 +35,51 @@ function humendad_sql(min, max) {
     return Math.floor(Math.random() * (max - min + 1) + min);
   }
 
-var f = fecha() 
 
+function distancia(min, max){
+    min = Math.ceil(1)
+    max = Math.floor(200)
+    return Math.floor(Math.random() * (max - min + 1) + min);
+}
+
+function luminocidad(min, max){
+    const d = new Date()
+
+    var horas = d.getHours()
+    if (horas > 18 ||  horas < 7){
+      luz = 1
+    }
+
+    if (horas <= 18 || horas >= 7){
+      luz = 0
+    }
+    return luz
+
+}
+
+
+
+
+var l = luminocidad()
+var d = distancia()
+var f = fecha() 
 var hum = humendad_sql()
 var h = hora_sql()
 var t = temperatura_sql()
+
+
+function toldo(estado){
+    if (l == 0 || d <75){
+        estado = 'cerrado'
+    }
+    else{
+        estado = 'abierto'
+    }
+
+    return estado
+}
+
+var e = toldo()
 
 conection.connect( (err) => {
     if(err) throw err
@@ -48,15 +88,10 @@ conection.connect( (err) => {
 
 
 
-conection.query(`INSERT INTO eventos (hora, medicion) VALUES(${h}, ${t})` , (err, rows) => {
+conection.query(`INSERT INTO eventos (hora, medicion) VALUES(${h}, ${d})` , (err, rows) => {
     if(err) throw err
     console.log('la conexion funciona') 
     console.log(h)
-})
-
-conection.query('SELECT * FROM eventos', (err, rows) => {
-    console.log(rows)
-
 })
 
 conection.query(`INSERT INTO humedad (fecha, humedad, temperatura, hora) VALUES('${f}' ,${hum}, ${t}, ${h})` , (err, rows) => {
@@ -64,6 +99,21 @@ conection.query(`INSERT INTO humedad (fecha, humedad, temperatura, hora) VALUES(
     console.log('la conexion funciona') 
     console.log(f)
 })
+
+conection.query(`INSERT INTO luminosidad (hora, fecha, luz) VALUES(${h}, '${f}', ${l})` , (err, rows) => {
+    if(err) throw err
+    console.log('la conexion funciona') 
+    console.log(h)
+
+})
+
+conection.query(`INSERT INTO toldo (estado, hora) VALUES('${e}', ${h})` , (err, rows) => {
+    if(err) throw err
+    console.log('la conexion funciona') 
+    console.log(h)
+})  
+
+
 
 
 
